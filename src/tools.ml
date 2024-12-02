@@ -8,8 +8,8 @@ let gmap gr f =
   let t graph arc = new_arc graph (a arc) in
   e_fold gr t (clone_nodes gr)
 
-
-
-
-let add_arc _gr _id1 _id2 _n = assert false
+let add_arc gr id1 id2 n = 
+  match find_arc gr id1 id2 with
+  | None -> let arc = {src = id1 ; tgt = id2 ; lbl = n} in new_arc gr arc
+  | Some arc1 -> let arc = {src = id1 ; tgt = id2 ; lbl = n + arc1.lbl} in new_arc gr arc
 (* Replace _gr and _f by gr and f when you start writing the real function. *)
