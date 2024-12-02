@@ -42,7 +42,7 @@ let () =
   let graph2 = gmap graph2 f1 in
 
   (* Rewrite the graph that has been read. *)
-  let () = write_file outfile graph2 in
+  let () = export outfile graph2 in
 
   ()
 

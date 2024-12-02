@@ -22,6 +22,8 @@ demo: build
 	./ftest.exe graphs/${graph} $(src) $(dst) outfile
 	@echo "\n   🥁  RESULT (content of outfile)  🥁\n"
 	@cat outfile
+	@dot -Tsvg outfile > outImage.svg
+	@open outImage.svg
 
 clean:
 	find -L . -name "*~" -delete
