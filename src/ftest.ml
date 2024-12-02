@@ -1,5 +1,6 @@
 open Gfile
 open Tools
+open Algo
     
 let () =
 
@@ -35,10 +36,11 @@ let () =
 
   let graph2 = gmap graph f in
   let graph2 = gmap graph2 f2 in
-  
-  let graph2 =  add_arc graph2 1 0 5 in
-  let graph2 =  add_arc graph2 0 1 5 in
 
+  let arcs = find_path graph2 0 5 [] in
+  let graph3 = clone_nodes graph2 in
+  
+  let graph2 = construire graph3 arcs in
   let graph2 = gmap graph2 f1 in
 
   (* Rewrite the graph that has been read. *)
