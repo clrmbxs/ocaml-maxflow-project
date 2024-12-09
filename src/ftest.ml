@@ -23,25 +23,24 @@ let () =
   and outfile = Sys.argv.(4)
   
   (* These command-line arguments are not used for the moment. *)
-  and _source = int_of_string Sys.argv.(2)
-  and _sink = int_of_string Sys.argv.(3)
+  and source = int_of_string Sys.argv.(2)
+  and sink = int_of_string Sys.argv.(3)
   in
 
   (* Open file *)
   let graph = from_file infile in
 
   let f lbl = int_of_string lbl in
-  let f1 lbl = string_of_int lbl in
-  let f2 lbl = lbl + 1 in
+  let _f1 lbl = string_of_int lbl in
+  let f2 = function
+    |(a,b) -> string_of_int a^"/"^string_of_int b
+  in
 
   let graph2 = gmap graph f in
+  let graph2 = ford_fulkerson2 graph2 source sink (initialize graph2) in
+  Printf.printf "Fini : %d \n %!" (3); 
   let graph2 = gmap graph2 f2 in
-
-  let arcs = find_path graph2 0 5 [] in
-  let graph3 = clone_nodes graph2 in
-  
-  let graph2 = construire graph3 arcs in
-  let graph2 = gmap graph2 f1 in
+  Printf.printf "Fini : %d \n %!" (5); 
 
   (* Rewrite the graph that has been read. *)
   let () = export outfile graph2 in

@@ -11,7 +11,7 @@ let gmap gr f =
 let add_arc gr id1 id2 n f= 
   match find_arc gr id1 id2 with
   | None -> let arc = {src = id1 ; tgt = id2 ; lbl = n} in new_arc gr arc
-  | Some arc1 -> let arc = {src = id1 ; tgt = id2 ; lbl = (f n arc1.lbl)} in new_arc gr arc
+  | Some arc1 -> let arc = {src = id1 ; tgt = id2 ; lbl = (f arc1.lbl n)} in new_arc gr arc
 
 let (++) op1 op2 = 
   match op1 with
@@ -23,3 +23,9 @@ let rec construire gr arcs =
   match arcs with
     | [] -> gr
     | arc::rest -> construire (add_arc gr arc.src arc.tgt arc.lbl (+)) rest
+
+let rec existe arc larcs = 
+  match larcs with
+    | [] -> false
+    | x::rest -> if x=arc then true else existe arc rest
+    
