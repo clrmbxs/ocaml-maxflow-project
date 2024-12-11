@@ -12,7 +12,6 @@ let rec find_path gr id1 id2 acu =
       | [] -> explore rest
       | _ -> res1
   in
-  Printf.printf "Je visite : %d \n %!" (id1);
   explore (out_arcs gr id1)
   
 
@@ -40,19 +39,21 @@ let rec augmentation gr n = function
 | [] -> gr
 | arc::rest -> augmentation (add_arc (add_arc gr arc.tgt arc.src n (+)) arc.src arc.tgt n (-)) n rest 
 
-  let rec ford_fulkerson gr id1 id2=
+  let rec ford_fulkerson2 gr id1 id2=
     match find_path gr id1 id2 [] with
       | [] -> gr
       | arcs -> Printf.printf "Min : %d \n %!" (min_flow arcs); 
-      ford_fulkerson (augmentation gr (min_flow arcs) arcs) id1 id2 
+      ford_fulkerson2 (augmentation gr (min_flow arcs) arcs) id1 id2 
   
 
-    let rec ford_fulkerson2 gr id1 id2 acu =
+    let rec ford_fulkerson gr id1 id2 acu =
     match find_path gr id1 id2 [] with
       | [] -> acu
-      | arcs -> Printf.printf "Min : %d \n %!" (min_flow arcs); 
-      ford_fulkerson2 (augmentation gr (min_flow arcs) arcs) id1 id2  (augmentationT acu (min_flow arcs) arcs)
+      | arcs -> ford_fulkerson (augmentation gr (min_flow arcs) arcs) id1 id2  (augmentationT acu (min_flow arcs) arcs)
 
-(*let rec ford_fulkerson2 gr id1 id2 =
-  let res = ford_fulkerson gr id1 id2 in
-  gmap gr1 (fun arc -> if (find_arc res arc.tgt arc.src) then*)
+    let flot gr id =
+      let f acu arc = 
+        match arc.lbl with
+        | (n,_) -> n + acu in 
+      List.fold_left f 0 (out_arcs gr id) 
+

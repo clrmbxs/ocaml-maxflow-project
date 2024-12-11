@@ -1,0 +1,13 @@
+%%TEAMS 
+
+t MI 83 8 % team: MI, wins: 83
+t CSK 80 3
+t KKR 78 6
+t DC 77 3
+
+%%MATCHS
+
+m MI CSK 1 % team1: MI, team2: CSK, number of remaining matchs: 1
+m MI KKR 6
+m MI DC 1
+m CSK DC 2

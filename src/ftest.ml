@@ -37,10 +37,9 @@ let () =
   in
 
   let graph2 = gmap graph f in
-  let graph2 = ford_fulkerson2 graph2 source sink (initialize graph2) in
-  Printf.printf "Fini : %d \n %!" (3); 
+  let graph2 = ford_fulkerson graph2 source sink (initialize graph2) in
+  Printf.printf "Flot max : %d \n %!" (flot graph2 source); 
   let graph2 = gmap graph2 f2 in
-  Printf.printf "Fini : %d \n %!" (5); 
 
   (* Rewrite the graph that has been read. *)
   let () = export outfile graph2 in
