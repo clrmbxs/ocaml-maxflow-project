@@ -1,21 +1,21 @@
-open Graph
-open Printf
+(*open Graph
+open Printf*)
 open Cricket
     
 (* Reads a line with a team. *)
 let read_team teams line=
-  try Scanf.sscanf line "t %s %d %d" (fun t w g-> {name=t; wins=w; g_left=g} :: teams)
+  try Scanf.sscanf line "t %d %s %d %d" (fun it t w g-> {idTeam=it; name=t; wins=w; g_left=g} :: teams)
   with e ->
-    Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
-    failwith "from_file"
+    Printf.printf "Cannot read team in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
+    failwith "from_file_cricket"
 
 let read_matchs lmatchs line=
-  try Scanf.sscanf line "t %s %s %d" (fun t1 t2 m-> {team1=t1; team2=t2; remain=m} :: lmatchs)
+  try Scanf.sscanf line "m %d %d %d %d" (fun im it1 it2 m-> {idMatch=im; idTeam1=it1; idTeam2=it2; remain=m} :: lmatchs)
   with e ->
-    Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
-    failwith "from_file"
+    Printf.printf "Cannot read match in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
+    failwith "from_file_cricket"
 
-let from_file path =
+let from_file_cricket path =
 
   let infile = open_in path in
 

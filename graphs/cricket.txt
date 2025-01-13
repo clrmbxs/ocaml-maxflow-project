@@ -1,0 +1,13 @@
+%%TEAMS 
+
+t 2 MI 83 8 % idTeam: 2, name: MI, wins: 83, games left: 8
+t 3 CSK 80 3
+t 4 KKR 78 6
+t 5 DC 77 3
+
+%%MATCHS
+
+m 23 2 3 1 % idMatch: 23 idTeam1: 2, idTeam2: 3, number of remaining matchs: 1
+m 24 2 4 6
+m 25 2 5 1
+m 35 3 5 2
