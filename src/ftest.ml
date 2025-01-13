@@ -44,8 +44,8 @@ let () =
 
   let teams={idTeam=2; name="MI"; wins=83; g_left=8}::{idTeam=3; name="CSK"; wins=80; g_left=3}::{idTeam=4; name="KKR"; wins=78; g_left=6}::{idTeam=5; name="DC"; wins=77; g_left=3}::[] in
   let matchs={idMatch=23; idTeam1=2; idTeam2=3; remain=1}::{idMatch=24; idTeam1=2; idTeam2=4; remain=6}::{idMatch=25; idTeam1=2; idTeam2=5; remain=1}::{idMatch=35; idTeam1=3; idTeam2=5; remain=2}::[] in
-  let graph = create_graph (find_team teams "MI") teams matchs in
-  let sol = cricket_elimination (from_file_cricket "/home/cleremba/Bureau/4_MIC_IR/prog fonc/projet/ocaml-maxflow-project/graphs/cricket.txt") "MI" in
+  let graph = create_graph (find_team teams "CSK") teams matchs in
+  let sol = cricket_elimination (from_file_cricket "./graphs/cricket.txt") "CSK" in
   Printf.printf "%b\n" (sol);
   (* Rewrite the graph that has been read. *)
   let () = export outfile (gmap graph _f1) in
