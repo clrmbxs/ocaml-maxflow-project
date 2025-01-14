@@ -2,6 +2,7 @@ Binôme 1: Matthias FORNARO
 Binôme 2: Samuel CLEREMBAUX
 
 Travail réalisé:
+
 -un module tools a été implémenté avec les fonctions requises ainsi qu'avec d'autres fonctions utiles pour notre implémentation de l'algorithme de Ford-Ferguson
 -la fonction export a été implémentée dans gfile
 -l'agorithme de Ford-Ferguson a été implémenté dans le module algo
