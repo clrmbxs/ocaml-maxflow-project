@@ -13,17 +13,19 @@ let add_arc gr id1 id2 n f=
   | None -> let arc = {src = id1 ; tgt = id2 ; lbl = n} in new_arc gr arc
   | Some arc1 -> let arc = {src = id1 ; tgt = id2 ; lbl = (f arc1.lbl n)} in new_arc gr arc
 
+(*addition pour les tuples*)
 let (++) op1 op2 = 
   match op1 with
     (a,b) -> match op2 with
     | (c,d) -> (a+c,b+d)  
-(* Replace _gr and _f by gr and f when you start writing the real function. *)
 
+(*ajoute une liste d'arcs à un graphe.*)
 let rec construire gr arcs = 
   match arcs with
     | [] -> gr
     | arc::rest -> construire (add_arc gr arc.src arc.tgt arc.lbl (+)) rest
 
+(*vérifie l'existence d'un arc dans une liste d'arcs.*)
 let rec existe arc larcs = 
   match larcs with
     | [] -> false

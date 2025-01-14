@@ -1,8 +1,10 @@
 open Gfile
 open Tools
 open Algo
-open Cricket
-open Cfile
+
+(*A décommenter pour tester cricket elimination.*)
+(*open Cricket
+open Cfile*)
     
 let () =
 
@@ -25,30 +27,37 @@ let () =
   and outfile = Sys.argv.(4)
   
   (* These command-line arguments are not used for the moment. *)
-  and source = int_of_string Sys.argv.(2)
-  and sink = int_of_string Sys.argv.(3)
+  and _source = int_of_string Sys.argv.(2)
+  and _sink = int_of_string Sys.argv.(3)
   in
   (* Open file *)
-  let graph = from_file infile in
+  let _graph = from_file infile in
 
-  let f lbl = int_of_string lbl in
+  let _f lbl = int_of_string lbl in
   let _f1 lbl = string_of_int lbl in
-  (*let f2 = function
+  let _f2 = function
     |(a,b) -> string_of_int a^"/"^string_of_int b
-  in*)
+  in
 
-  let graph2 = gmap graph f in
-  let graph2 = ford_fulkerson graph2 source sink (initialize graph2) in
-  Printf.printf "Flot max : %d \n %!" (flot graph2 source); 
-  (*let graph2 = gmap graph2 f2 in*)
+  (*A commenter pour tester cricket elimination.*)
+  (*Début*)
+  let graph2 = gmap _graph _f in
+  let graph2 = ford_fulkerson graph2 _source _sink (initialize graph2) in
+  Printf.printf "Flot max : %d \n%!" (flot graph2 _source); 
 
-  let teams={idTeam=2; name="MI"; wins=83; g_left=8}::{idTeam=3; name="CSK"; wins=80; g_left=3}::{idTeam=4; name="KKR"; wins=78; g_left=6}::{idTeam=5; name="DC"; wins=77; g_left=3}::[] in
-  let matchs={idMatch=23; idTeam1=2; idTeam2=3; remain=1}::{idMatch=24; idTeam1=2; idTeam2=4; remain=6}::{idMatch=25; idTeam1=2; idTeam2=5; remain=1}::{idMatch=35; idTeam1=3; idTeam2=5; remain=2}::[] in
-  let graph = create_graph (find_team teams "CSK") teams matchs in
-  let sol = cricket_elimination (from_file_cricket "./graphs/cricket.txt") "CSK" in
+  let () = export outfile (gmap graph2 _f2) in
+  (*Fin*)
+  
+  (*A décommenter pour tester cricket elimination.*)
+
+  (*let obsevrved_team = "CSK" in
+  let (teams,matchs) = from_file_cricket "./graphs/cricket.txt" in
+  let graph = create_graph (find_team teams obsevrved_team) teams matchs in
+  let sol = cricket_elimination (from_file_cricket "./graphs/cricket.txt") obsevrved_team in
   Printf.printf "%b\n" (sol);
-  (* Rewrite the graph that has been read. *)
-  let () = export outfile (gmap graph _f1) in
+
+  let () = export outfile (gmap graph _f1) in*)
+  
 
   ()
 
